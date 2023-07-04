@@ -100,21 +100,33 @@ def genNavicCaCode(sv):
     # return C/A code!
     return np.array(ca)
 
-#function to upsample the PRN sequence generated to required sampling rate
 def genNavicCaTable(samplingFreq):
-    prnIdMax = 14
-    codeLength = 1023
+    """Upsample the CA code(PRN) to the given sampling frequency
+    
+    :param int samplingFreq: frequency to upsample to
+    :returns list: upsampled CA code 
+        
+    """
+    prnIdMax = 14 
+    codeLength = 1023 
     codeFreqBasis = 1.023e6
     samplingPeriod = 1/samplingFreq
     sampleCount = int(np.round(samplingFreq / (codeFreqBasis / codeLength)))
     indexArr = (np.arange(sampleCount)*samplingPeriod*codeFreqBasis).astype(np.float32)     # Avoid floating point error due to high precision
     indexArr = indexArr.astype(int)
-    return np.array([genNavicCaCode(i) for i in range(1,prnIdMax+1)])[:,indexArr].T
+    return np.array([genNavicCaCode(i) for i in range(1,prnIdMax+1)])[:,indexArr].T     # column-wise PRN Sequence for all 14 satellites
 
-# Bit generation and Modulation API
-#class below will generate modulated IQ samples, follows ICD
 class NavicL5sModulator():
+    """NavicL5sModulator will generate modulated IQ samples
+    
+    """
+
     def __init__(self, fs):
+        """The init function is executed always when class is initiated
+        
+        :param float fs: sample rate
+        
+        """
         self.sampleRate = fs
         self.codePhase = 0
 
@@ -127,15 +139,21 @@ class NavicL5sModulator():
     # columns of x have samples
     # columns of codeTable have sampled PRN sequence
     def Modulate(self, x, codeTable):
+        """Modulate the samples and PRN sequence according to ICD
+        
+        :param list x: nav data samples
+        :param list codeTable: upsampled CA code table
+        :returns list iqsig: baseband modulated signal
 
+        """
         codeNumSample = codeTable.shape[0]
         numSample = x.shape[0]
         numChannel = x.shape[1]
 
-        spsBpskSig = 1-2*np.logical_xor(x, codeTable[np.arange(self.codePhase, self.codePhase+numSample)%codeNumSample, :])
+        spsBpskSig = 1-2*np.logical_xor(x, codeTable[np.arange(self.codePhase, self.codePhase+numSample)%codeNumSample, :])     # BPSK Modulated (SPS XOR PRN)
 
         # Subcarrier generation for BOC
-        subCarr1Ch = self.__GenBocSubCarrier(numSample)
+        subCarr1Ch = self.__GenBocSubCarrier(numSample)     
         SubCarrSig = np.tile(np.array([subCarr1Ch]).T, (1, numChannel))
 
         # PRN sequence of SPS is RS pilot PRN sequence
@@ -159,6 +177,12 @@ class NavicL5sModulator():
         return iqsig
     
     def __GenBocSubCarrier(self, N):
+       """Function to generate Binary Offset sub carrier signal
+
+       :param int N: Number of samples to generate
+       :returns subCarrier: Boc signal
+
+       """
        ts = 1/self.sampleRate
        t = np.arange(N)*ts
        
@@ -177,7 +201,19 @@ class NavicL5sModulator():
 
 #class to generate navigation data at 50sps
 class NavicDataGen():
+    """NavicDataGen generates raw samples of data
+    
+    """
+    
     def __init__(self, ds=50, fs=10*1.023e6, numChannel=1, file=None):
+      """The init function is executed always when class is initiated
+      
+      :param int ds: data rate/bit rate
+      :param int fs: sample rate
+      :param int numChannel: number of Channels
+      :param bool file: data file if present
+
+      """
       self.dataRate = ds
       self.sampleRate = fs
       self.numSamplesPerBit = round(fs/ds)
@@ -187,35 +223,68 @@ class NavicDataGen():
       self.bitStream[0,:] = np.random.binomial(1, 0.5, (numChannel, ))
 
     def GenerateBits(self, timeInterval):
+      """Function to generate bits upto given time interval
+      
+      :param float timeInterval: time interval required
+      :returns list genStream: bits upto given time interval
+      
+      """
       genStream = np.empty((1,self.numChannel))
       numBitsToGen = round(self.sampleRate*timeInterval)
 
-      bufferCnt = numBitsToGen
-      while bufferCnt > 0:
+      bufferCnt = numBitsToGen 
+      # Main loop to generate sampled bits for given time interval
+      while bufferCnt > 0: 
+        # If remaining samples to generate is within the current bit's remaining duration
         if(bufferCnt < self.samplesToNextBit):
+          # Copy current bit
           genStream = np.append(genStream, np.repeat(self.bitStream[-1:], bufferCnt, axis=0), axis=0)
+          # Update current bit's remaining duration
           self.samplesToNextBit -= bufferCnt
           bufferCnt = -1
         else:
+          # Copy current bit for remaining duration
           genStream = np.append(genStream, np.repeat(self.bitStream[-1:], self.samplesToNextBit, axis=0), axis=0)
+          # Generate new bit
           self.bitStream = np.append(self.bitStream, np.random.binomial(1, 0.5, (1, self.numChannel)), axis=0)
+          # Update remaining samples to generate
           bufferCnt -= self.samplesToNextBit
+          # Update remaining duration of current bit
           self.samplesToNextBit = self.numSamplesPerBit
       
       return genStream[1:numBitsToGen+1]
     
     def GetBitStream(self):
+       """Function to return bitstream of nav data
+             
+       :returns list genStream: generated bits
+
+       """
        return self.bitStream
       
 # Channel model API
 #the functions below simulate a channel, thereby create offsets and shift delays.
 class PhaseFrequencyOffset():
+  """Class to generate phase and frequency offset for channel simualtion
+  
+  """
   def __init__(self, sample_rate=1, phase_offset=0):
+    """The init function is executed always when class is initiated
+    :param int sample_rate: 1
+    :param int phase_offset: 0
+    
+    """
     self.phi = phase_offset
     self.dt = 1/sample_rate
     self.off_phi = 0
 
   def Offset(self, x, fShift):
+    """Applies Doppler shift to incoming signal
+    
+    :param list x: nav data signal
+    :param list fShift: list of frequency shifts applied to signal
+
+    """
     (N,M) = x.shape
     if(type(self.off_phi)==int):
       self.off_phi = np.zeros(M) 
@@ -229,10 +298,24 @@ class PhaseFrequencyOffset():
     self.off_phi = 0
 
 class IntegerDelay():
+  """Delay the incoming signal by integer number of samples
+
+  """
   def __init__(self, delays):
+    """The init function is executed always when class is initiated
+    
+    :param int delays: delay value to be applied
+    
+    """
     self.D_buffer = [np.zeros(i) for i in delays.astype(int)]
 
   def Delay(self, x):
+    """function to delay the input signal
+    
+    :param list x: input signal
+    :returns list y: delayed input signal
+    
+    """
     y = np.zeros_like(x)
     N = x.shape[0]
     for i in range(0,len(self.D_buffer)):
@@ -241,7 +324,16 @@ class IntegerDelay():
 
 
 class FractionalDelay():
+  """Delay the incoming signal by fractional number of samples
+  
+  """
   def __init__(self, L=4, Dmax=100):
+    """The init function is executed always when class is initiated
+    
+    :param int L: Filter length
+    :param int Dmax: maximum delay value
+    
+    """
     self.L = L
     self.T = L-1
     if(Dmax > 65535):
@@ -253,6 +345,11 @@ class FractionalDelay():
     self.Nch = -1
 
   def Delay(self, x, D):
+    """Delays the incoming signal by given fractional delay value
+    
+    :param list x: incoming signal
+    :param list D: fractional delay values for multiple channels
+    :returns list y: delayed incoming signal"""
 
     # If calling first time after empty delay buffer
     if(self.Nch < 0):
@@ -291,6 +388,11 @@ class FractionalDelay():
 # x - input samples
 # SqrtPr - square root of received power
 def PowerScale(x, SqrtPr):
+    """Scale the incoming signal's power by given factor
+    
+    :param list x: incoming signal
+    :param list SqrtPr: list of factors
+    :returns list scaledsig: scaled incoming signal by given factor"""
     rmsPow = np.sqrt(np.mean(np.abs(x)**2, axis=0))
     rmsPow[rmsPow==0.0] = 1
     scaledsig = SqrtPr*x/rmsPow
@@ -318,11 +420,12 @@ def navic_pcps_acquisition(x, prnSeq, fs, fSearch, threshold=0):
     t = np.arange(K)*ts
 
     Rxd = np.empty((K, N), dtype=np.complex_)
-    for i in range(0,N):
+
+    for i in range(0,N):       #  Multiplication of IQ waveform and conjugate PRN sequence in frequency domain per frequency step
         x_iq = x*np.exp(-1j*2*np.pi*fSearch[i]*t)
         XFFT = np.fft.fft(x_iq)
         YFFT = XFFT*prnSeqFFT
-        Rxd[:,i] = (1/K)*np.fft.ifft(YFFT)
+        Rxd[:,i] = (1/K)*np.fft.ifft(YFFT)      # IFFT for final product
 
     maxIndex = np.argmax(np.abs(Rxd)**2)
     maxCol = maxIndex%N
@@ -342,7 +445,13 @@ def navic_pcps_acquisition(x, prnSeq, fs, fSearch, threshold=0):
 #acquisition will provide rough frequency and code offsets. tracking will do precise calculation of frequency shifts and code delays
 #thereby locks the values once threshold is reached
 class NavicTracker:
+    """NavicTracker will implement the carrier and code tracking loops
+    
+    """
     def __init__(self):
+        """The init function is executed always when class is initiated
+
+        """
         # Public, tunable properties
         self.InitialCodePhaseOffset = 0
         self.InitialDopplerShift = 0
@@ -403,6 +512,9 @@ class NavicTracker:
         self.pBuffer = None
 
     def setupImpl(self):
+        """ This will initialize all the tracking loop parameters
+
+        """
 
         # Perform one-time calculations, such as computing constants
         self.pNumIntegSamples = self.SampleRate*self.PLLIntegrationTime*1e-3
@@ -454,17 +566,17 @@ class NavicTracker:
         numCACodeBlocks = self.PLLIntegrationTime # Each C/A-code block is of 1 milliseconds.
         code = 1 - 2 * genNavicCaCode(self.PRNID).astype(float)
         self.pSamplesPerChip = self.SampleRate / self.ChipRate
-        sampleFactor = Fraction(self.pSamplesPerChip)
-        upSampleFactor = sampleFactor.numerator; downSampleFactor = sampleFactor.denominator
         numSamplesPerCodeBlock = self.SampleRate * 1e-3 # As each code block is of 1e-3 seconds
-        upwave1 = np.repeat(code, upSampleFactor)
-        self.pPromptCode = np.tile(upwave1[::downSampleFactor], numCACodeBlocks)
+        self.pPromptCode = np.tile(self.__upsample_table(code, self.SampleRate), numCACodeBlocks)
 
         # Calculate number of samples in delay
         numsamprot = round(self.InitialCodePhaseOffset * self.pSamplesPerChip) # Number of samples to rotate
         self.pNumSamplesToAppend = numSamplesPerCodeBlock - (numsamprot % numSamplesPerCodeBlock)
 
     def stepImpl(self, u):
+        """This will execute the tracking loops for fixed integration time
+
+        """
         # Implement algorithm. Calculate y as a function of input u and
         # discrete states.
         
@@ -577,8 +689,25 @@ class NavicTracker:
         self.pPLLNCOOut = phnco
 
         return y, fqyerr, fqynco, pherr, phnco, delayerr, delaynco
+    
+    def __upsample_table(self, codeBase, samplingFreq):
+        """Upsample PRN sequence of satellite being tracked
+     
+        :param list codeBase: PRN sequence for complete period
+        :param list samplingFreq: Desired sampling frequency
+        :returns list y: Sampled PRN sequence"""
+        codeLength = 1023
+        codeFreqBasis = 1.023e6
+        samplingPeriod = 1/samplingFreq
+        sampleCount = int(np.round(samplingFreq / (codeFreqBasis / codeLength)))
+        indexArr = (np.arange(sampleCount)*samplingPeriod*codeFreqBasis).astype(np.float32)     # Avoid floating point error due to high precision
+        indexArr = indexArr.astype(int)
+        return codeBase[indexArr]
 
     def resetImpl(self):
+        """This will reset the tracking loops
+        
+        """
         # Initialize / reset discrete-state properties
         self.pBuffer = np.zeros(round(self.pNumSamplesToAppend))
         self.pFLLWPrevious1 = 0

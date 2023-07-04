@@ -4,6 +4,8 @@
 \documentclass[11pt]{book}
 \usepackage{gvv-book}
 \usepackage{gvv}
+\usepackage{caption}
+%\usepackage{amsmath}
 %\usepackage{Wiley-AuthoringTemplate}
 \usepackage[sectionbib,authoryear]{natbib}% for name-date citation comment the below line
 %\usepackage[sectionbib,numbers]{natbib}% for numbered citation comment the above line
@@ -31,7 +33,7 @@
 %% Wiley will provide title and copyright page, but you can make
 %% your own titlepages if you'd like anyway
 %% Setting up title pages, type in the appropriate names here:
-\booktitle{The Navic Standard}
+\booktitle{Navic Standard Simulation}
 
 \subtitle{Through Python}
 
@@ -80,8 +82,8 @@
 
 \tableofcontents
 
-%\listoffigures %optional
-%\listoftables  %optional
+\listoffigures %optional
+\listoftables  %optional
 
 %% or Contributor Page for edited books
 %% before \tableofcontents
@@ -192,26 +194,25 @@
 
 \setcounter{page}{1}
 
-\begin{introduction}
-This book introduces the NAVIC communication standard through Python exercises
-\end{introduction}
 \mainmatter
-\chapter{Design Parameters}
+\chapter{Introduction}
+\input{chapters/intro/intro.tex}
+\chapter{NavIC System Overview}
 \input{chapters/bands/navicBands.tex}
 \chapter{Transmitter}
 \input{chapters/transmitter/transmitter.tex}
-\chapter{Channel Modelling}
-\input{chapters/channelModelling/channelModelling.tex}
-\chapter{Receiver}
-\input{chapters/receiver/receiver.tex}
-\chapter{Demodulation}
-\input{chapters/demodulation/demodulation.tex}
-\chapter{Channel Decoding}
-\input{chapters/decoder/decoding.tex}
-\backmatter
-\appendix
-\chapter{Computing the Position and Velocity of the satellite from the RINEX file}
-\input{chapters/rinexread/rinexread.tex}
+%\chapter{Channel Modelling}
+%\input{chapters/channelModelling/channelModelling.tex}
+%\chapter{Receiver}
+%\input{chapters/receiver/receiver.tex}
+%\chapter{Demodulation}
+%\input{chapters/demodulation/demodulation.tex}
+%\chapter{Channel Decoding}
+%\input{chapters/decoder/decoding.tex}
+%\backmatter
+%\appendix
+%\chapter{Computing the Position and Velocity of the satellite from the RINEX file}
+%\input{chapters/rinexread/rinexread.tex}
 
 \latexprintindex
 \end{document} 

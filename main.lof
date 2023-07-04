@@ -1,0 +1,12 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Frequency bands of NavIC Signals\relax }}{3}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces NavIC Architecture\relax }}{9}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces the NavIC bands segment blocks\relax }}{10}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Transmitter Block diagram\relax }}{13}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Master Frame Structure\relax }}{14}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Structure of subframe 1 and 2\relax }}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Structure of subframe 3 and 4\relax }}{15}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces SPS PRN Code Generator\relax }}{16}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces FEC Encoding\relax }}{17}{figure.caption.14}%

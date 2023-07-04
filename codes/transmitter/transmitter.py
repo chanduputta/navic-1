@@ -109,6 +109,42 @@ def genNavicCaTable(samplingFreq):
     indexArr = (np.arange(sampleCount)*samplingPeriod*codeFreqBasis).astype(np.float32)     # Avoid floating point error due to high precision
     indexArr = indexArr.astype(int)
     return np.array([genNavicCaCode(i) for i in range(1,prnIdMax+1)])[:,indexArr].T
+    
+    
+
+#class to generate navigation data at 50sps  (random bits)
+class NavicDataGen():
+    def __init__(self, ds=50, fs=10*1.023e6, numChannel=1, file=None):
+      self.dataRate = ds
+      self.sampleRate = fs
+      self.numSamplesPerBit = round(fs/ds)
+      self.samplesToNextBit = self.numSamplesPerBit
+      self.numChannel = numChannel
+      self.bitStream = np.empty((1, numChannel))
+      self.bitStream[0,:] = np.random.binomial(1, 0.5, (numChannel, ))
+
+    def GenerateBits(self, timeInterval):
+      genStream = np.empty((1,self.numChannel))
+      numBitsToGen = round(self.sampleRate*timeInterval)
+
+      bufferCnt = numBitsToGen
+      while bufferCnt > 0:
+        if(bufferCnt < self.samplesToNextBit):
+          genStream = np.append(genStream, np.repeat(self.bitStream[-1:], bufferCnt, axis=0), axis=0)
+          self.samplesToNextBit -= bufferCnt
+          bufferCnt = -1
+        else:
+          genStream = np.append(genStream, np.repeat(self.bitStream[-1:], self.samplesToNextBit, axis=0), axis=0)
+          self.bitStream = np.append(self.bitStream, np.random.binomial(1, 0.5, (1, self.numChannel)), axis=0)
+          bufferCnt -= self.samplesToNextBit
+          self.samplesToNextBit = self.numSamplesPerBit
+      
+      return genStream[1:numBitsToGen+1]
+    
+    def GetBitStream(self):
+       return self.bitStream    
+    
+
 
 # Bit generation and Modulation API
 #class below will generate modulated IQ samples, follows ICD
@@ -174,34 +210,4 @@ class NavicL5sModulator():
         epsilon = fsc*1/(100*self.sampleRate)
         self.subCarrPhase = epsilon
 
-#class to generate navigation data at 50sps
-class NavicDataGen():
-    def __init__(self, ds=50, fs=10*1.023e6, numChannel=1, file=None):
-      self.dataRate = ds
-      self.sampleRate = fs
-      self.numSamplesPerBit = round(fs/ds)
-      self.samplesToNextBit = self.numSamplesPerBit
-      self.numChannel = numChannel
-      self.bitStream = np.empty((1, numChannel))
-      self.bitStream[0,:] = np.random.binomial(1, 0.5, (numChannel, ))
 
-    def GenerateBits(self, timeInterval):
-      genStream = np.empty((1,self.numChannel))
-      numBitsToGen = round(self.sampleRate*timeInterval)
-
-      bufferCnt = numBitsToGen
-      while bufferCnt > 0:
-        if(bufferCnt < self.samplesToNextBit):
-          genStream = np.append(genStream, np.repeat(self.bitStream[-1:], bufferCnt, axis=0), axis=0)
-          self.samplesToNextBit -= bufferCnt
-          bufferCnt = -1
-        else:
-          genStream = np.append(genStream, np.repeat(self.bitStream[-1:], self.samplesToNextBit, axis=0), axis=0)
-          self.bitStream = np.append(self.bitStream, np.random.binomial(1, 0.5, (1, self.numChannel)), axis=0)
-          bufferCnt -= self.samplesToNextBit
-          self.samplesToNextBit = self.numSamplesPerBit
-      
-      return genStream[1:numBitsToGen+1]
-    
-    def GetBitStream(self):
-       return self.bitStream

@@ -1,52 +1,28 @@
-\vskip -8pt
-\contentsline {schapter}{Introduction}{iii}{chapter*.2}%
-\contentsline {chapter}{\numberline {1}Design Parameters}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}The Frequency Bands}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}L-band}{2}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}S-band}{2}{subsection.1.1.2}%
-\contentsline {section}{\numberline {1.2}NavIC carrier frequencies}{3}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Standard Positioning Service (SPS)}{3}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Restricted Service (RS)}{4}{subsection.1.2.2}%
-\contentsline {chapter}{\numberline {2}Transmitter}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Frame structure}{5}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}Cyclic Redundancy Check(CRC)}{5}{subsection.2.1.1}%
-\contentsline {section}{\numberline {2.2}Encoding}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Interleaving}{6}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Sync word and Tail bits}{6}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Modulation}{7}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Standard Positioning Service}{7}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Pseudo Random Noise codes(PRN)}{7}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Baseband Modulation}{7}{subsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.3.1}Mathematical Equations}{8}{subsubsection.2.3.3.1}%
-\contentsline {chapter}{\numberline {3}Channel Modelling}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Doppler shift}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Delay}{13}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Power Scaling}{14}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Thermal noise}{15}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Receiver}{17}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Hardware Implementation}{17}{section.4.1}%
-\contentsline {section}{\numberline {4.2}RTL SDR Specifications}{17}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Results}{21}{subsection.4.2.1}%
-\contentsline {section}{\numberline {4.3}USRP SDR}{22}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1} USRP SDR specification}{23}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Results}{26}{subsection.4.3.2}%
-\contentsline {chapter}{\numberline {5}Demodulation}{27}{chapter.5}%
-\contentsline {section}{\numberline {5.1}what is Demodulation}{27}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Signal Acquistion}{28}{subsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.1.1}Implementation of CA PCPS Acquisition}{29}{subsubsection.5.1.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Carrier tracking loop:}{31}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Code tracking loop:}{33}{subsection.5.1.3}%
-\contentsline {subsection}{\numberline {5.1.4}Loop filter characteristics}{34}{subsection.5.1.4}%
-\contentsline {chapter}{\numberline {6}Channel Decoding}{37}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Definition}{37}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Process}{37}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Convolutional Code Representation:}{38}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Branch Metrics:}{38}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}Path Metrics:}{38}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}Survivor Paths:}{39}{subsection.6.1.5}%
-\contentsline {subsection}{\numberline {6.1.6}Traceback:}{39}{subsection.6.1.6}%
-\contentsline {subsection}{\numberline {6.1.7}Decoding Output:}{40}{subsection.6.1.7}%
-\contentsline {section}{\numberline {6.2}Software}{44}{section.6.2}%
-\contentsline {chapter}{\numberline {A}Computing the Position and Velocity of the satellite from the RINEX file}{45}{appendix.A}%
-\contentsline {section}{\numberline {A.1}Installations}{45}{section.A.1}%
-\contentsline {section}{\numberline {A.2}Algorithm}{45}{section.A.2}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Scope of simulation}{2}{section.1.1}%
+\contentsline {chapter}{\numberline {2}NavIC System Overview}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The Frequency Bands}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}L-band}{6}{subsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}L1}{6}{subsubsection.2.1.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.2}L5}{7}{subsubsection.2.1.1.2}%
+\contentsline {subsection}{\numberline {2.1.2}S-band}{7}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}NavIC Architecture}{8}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Space segment}{8}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Ground segment}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}User segment}{10}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}NavIC Services}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Standard Positioning Service (SPS)}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Restricted Service (RS)}{11}{subsection.2.3.2}%
+\contentsline {chapter}{\numberline {3}Transmitter}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}IRNSS Navigation data}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Frame structure}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Encoding}{15}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}PRN codes for SPS}{15}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}FEC Encoding}{16}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Interleaving}{17}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Sync word and Tail bits}{18}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Cyclic Redundancy Check(CRC)}{18}{subsection.3.3.5}%
+\contentsline {section}{\numberline {3.4}Modulation}{18}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Standard Positioning Service}{18}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Baseband Modulation}{19}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}Mathematical Equations}{19}{subsubsection.3.4.2.1}%
