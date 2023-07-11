@@ -12,7 +12,7 @@ The NavIC transmitter is simulated to send baseband signal to the channel as sho
 \section{IRNSS Navigation data}
 Navigation data in satellite communication refers to the crucial information transmitted between satellites and ground-based receivers to facilitate accurate positioning and navigation. It includes data related to satellite orbits, precise timing, and other parameters necessary for determining the satellite's position relative to the Earth's surface.
 \section{Frame structure}
-NavIC master frame consists of $2400$ symbols, divided into $4$ subframes. Each subframe is $600$ symbols long. Each subframe has $16$ bit Sync word followed by $584$ bits of interleaved data. Subframes $1$ and $2$ transmit fixed primar navigation parameters. Subframe $3$ and $4$ transmit secondary navigation parameters in the form of messages. The master frame structure is shown in figure \ref{fig:master_frame}. 
+NavIC master frame consists of $2400$ symbols, divided into $4$ subframes. Each subframe is $600$ symbols long. Each subframe has $16$ bit Sync word followed by $584$ bits of interleaved data. Subframes $1$ and $2$ transmit fixed primary navigation parameters. Subframe $3$ and $4$ transmit secondary navigation parameters in the form of messages. The master frame structure is shown in figure \ref{fig:master_frame}. 
 
 \begin{figure}[ht]
 \centering
@@ -71,9 +71,9 @@ Polynomial G1 and G2 are similar to the ones used by GPS C/A signal. The G1 and 
 \label{table:sps_codes}
 \end{table}
 
+\newpage
 \subsection{FEC Encoding}
-The Navigation data subframe of $292$ bits is convolution encoded with a rate of 1/2 and clocked at $50$ symbols per second. The coding scheme is given in figure \ref{fig:FEC}. Each subframe of $292$ bits, after encoding, results in $584$ symbols.
-
+The Navigation data subframe of $292$ bits is convolution encoded with a rate of 1/2 and clocked at $50$ symbols per second. The coding scheme is given in figure \ref{fig:FEC}. Each subframe of $292$ bits, after encoding, results in $584$ symbols. Various FEC encoding parameters used in NavIC are tabulated in table \ref{table:fec_enc}.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=\columnwidth]{figs/FEC.png}
@@ -82,11 +82,18 @@ The Navigation data subframe of $292$ bits is convolution encoded with a rate of
 \caption{FEC Encoding}
 \label{fig:FEC}
 \end{figure}
-
+\newpage
+\begin{table}[h]
+%\centering
+\input{tables/enc_param.tex}
+\vspace{3mm}
+\caption{FEC encoding parameters}
+\label{table:fec_enc}
+\end{table}
 \subsection{Interleaving}
 Any burst errors during the data transmission can be corrected by interleaving. In matrix interleaving, input symbols are filled into a matrix column wise and read at the output row wise. This will spread the burst error, if any, during the transmission. For SPS, data is filled into matrix of size $73$ by $8$($73$ columns, $8$ rows).
 \subsection{Sync word and Tail bits}
-Each subframe has a $16$ bit word synchronization pattern which is not encoded. Sync pattern is $EB90$ Hex. Tail bit consists of $6$ zero value bits enabling completion of FEC decoding of each subframe in the receiver.
+Each subframe has a $16$ bit word synchronization pattern which is not encoded. Sync pattern is $EB90$ Hex. Tail bits consist of $6$ zero value bits added to the subframe and tail bits are part of FEC encoding. 
 
 \subsection{Cyclic Redundancy Check(CRC)}
 The parity coding of data signal follows $24$Q polynomial for each subframe. $24$ bits of CRC parity will provide protection against burst as well as random errors with undetected error probability of $2^{-24}$ for all channel bit error probabilities $0.5$.
@@ -149,4 +156,4 @@ The functions for data generation, SPS-PRN sequence generation and baseband modu
 \begin{lstlisting}
     codes/transmitter/transmitter.py
 \end{lstlisting}
-
+\let\cleardoublepage\clearpage

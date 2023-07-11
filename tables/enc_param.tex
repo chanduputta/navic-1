@@ -123,8 +123,8 @@
 \setlongtables
 
 \setlength\gnumericTableWidth{%
-	68pt+%
-	235pt+%
+	30pt+%
+	30pt+%
 0pt}
 \def\gumericNumCols{2}
 \setlength\gnumericTableWidthComplete{\gnumericTableWidth+%
@@ -144,8 +144,8 @@
 %%                                                                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ifthenelse{\isundefined{\gnumericColA}}{\newlength{\gnumericColA}}{}\settowidth{\gnumericColA}{\begin{tabular}{@{}p{68pt*\gnumericScale}@{}}x\end{tabular}}
-\ifthenelse{\isundefined{\gnumericColB}}{\newlength{\gnumericColB}}{}\settowidth{\gnumericColB}{\begin{tabular}{@{}p{235pt*\gnumericScale}@{}}x\end{tabular}}
+\ifthenelse{\isundefined{\gnumericColA}}{\newlength{\gnumericColA}}{}\settowidth{\gnumericColA}{\begin{tabular}{@{}p{115pt*\gnumericScale}@{}}x\end{tabular}}
+\ifthenelse{\isundefined{\gnumericColB}}{\newlength{\gnumericColB}}{}\settowidth{\gnumericColB}{\begin{tabular}{@{}p{115pt*\gnumericScale}@{}}x\end{tabular}}
 
 \begin{longtable}[c]{%
 	b{\gnumericColA}%
@@ -182,61 +182,50 @@
 %	\endlastfoot
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\hhline{|-|-}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{0.75cm}\textbf{Symbol}}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{3cm} \textbf{Definition}}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$x_{IN}[k]$}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Complex vector $I,Q$ samples of received signal}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}A(t)}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Signal Amplitude}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$\hat s_T(t)$}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{filtered version of $s_T(t)$}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$f_D(t)$ }}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Time varying doppler shift}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$\Phi (t)$}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Time varying carrier phase shift}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$\tau (t)$}}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Time varying code delay}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}n(t) }}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Time varying random noise}}
-\\
-\hhline{|--|}
-	 \multicolumn{1}{|p{\gnumericColA}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}$T_s$ }}
-	&\multicolumn{1}{p{\gnumericColB}|}%
-	{\gnumericPB{\raggedright}\gnumbox[l]{Sampling period}}
-\\
 \hhline{|-|-|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\textbf{Parameter}}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1.2cm}\textbf{Value}}}
+\\
+
+\hhline{|--|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{Coding Rate}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1.6cm}$\frac{1}{2}$}}
+\\
+\hhline{|--|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{Coding Scheme}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{0.8cm}Convolution}}
+\\
+\hhline{|--|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{Constraint Length}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1.6cm}$7$}}
+\\
+\hhline{|--|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{Generator Polynomial}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}G1=(171)o}}
+\\
+\hhline{|  |}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}G2=(133)o}}
+\\
+\hhline{|--|}
+	 \multicolumn{1}{|p{\gnumericColA}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{Encoding Sequence}}
+	&\multicolumn{1}{p{\gnumericColB}|}%
+	{\gnumericPB{\raggedright}\gnumbox[l]{\hspace{1cm}G$1$ then G$2$}}
+\\
+\hhline{|--|}
 \end{longtable}
 
 \ifthenelse{\isundefined{\languageshorthands}}{}{\languageshorthands{\languagename}}

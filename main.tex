@@ -9,7 +9,7 @@
 %\usepackage{Wiley-AuthoringTemplate}
 \usepackage[sectionbib,authoryear]{natbib}% for name-date citation comment the below line
 %\usepackage[sectionbib,numbers]{natbib}% for numbered citation comment the above line
-
+\usepackage{natbib}
 %%********************************************************************%%
 %%       How many levels of section head would you like numbered?     %%
 %% 0= no section numbers, 1= section, 2= subsection, 3= subsubsection %%
@@ -201,18 +201,23 @@
 \input{chapters/bands/navicBands.tex}
 \chapter{Transmitter}
 \input{chapters/transmitter/transmitter.tex}
-%\chapter{Channel Modelling}
-%\input{chapters/channelModelling/channelModelling.tex}
-%\chapter{Receiver}
-%\input{chapters/receiver/receiver.tex}
-%\chapter{Demodulation}
-%\input{chapters/demodulation/demodulation.tex}
-%\chapter{Channel Decoding}
-%\input{chapters/decoder/decoding.tex}
+\chapter{Channel Modelling}
+\input{chapters/channelModelling/channelModelling.tex}
+\chapter{Receiver}
+\input{chapters/receiver/receiver.tex}
+\chapter{Results}
+\input{chapters/results/results.tex}
 %\backmatter
 %\appendix
 %\chapter{Computing the Position and Velocity of the satellite from the RINEX file}
 %\input{chapters/rinexread/rinexread.tex}
+%\newpage
+%\begin{thebibliography}{00}
+%\bibitem{b1} \text{https://www.isro.gov.in/media_isro/pdf/Publications/Vispdf/Pdf2017/1a_messgingicd_receiver_incois_approved_ver_1.2.pdf} 
+%\bibitem{b2} \text{https://gnss-sdr.org/docs/sp-blocks/acquisition/}
+%\bibitem{b3} \text{https://gnss-sdr.org/docs/sp-blocks/tracking/}
+%\bibitem{b4} Elliott D. Kaplan and Christopher J. Hegarty "Understanding GPS Principles and Applications"
+%\end{thebibliography}
 
 \latexprintindex
 \end{document} 

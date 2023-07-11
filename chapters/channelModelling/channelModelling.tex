@@ -1,6 +1,11 @@
 The phenomena modelled in the satellite communication channel are 
-\\
-Doppler shift, delay, power scaling and thermal noise at the receiver.
+\begin{enumerate}
+   \item Doppler shift
+   \item Delay 
+   \item Power scaling and 
+   \item Thermal noise at the receiver
+\end{enumerate}
+
 \section{Doppler shift}
 Due to relative motion between the satellites and the receiver, the transmitted signals undergo a frequency shift before arriving at the receiver. This shift %
 in frequency is called Doppler shift and can be computed as
@@ -9,7 +14,7 @@ in frequency is called Doppler shift and can be computed as
 \end{equation}
 where,
 
-$f_{Shift}$ = Frequency shift due to Doppler
+$f_{shift}$ = Frequency shift due to Doppler effect
 
 $f_{d}$ = Frequency observed at receiver
 
@@ -20,6 +25,7 @@ $V_{rel}$ = Relative velocity of transmitter and receiver
 $V_{S,dir}$ = Velocity of satellite along radial direction
 
 $c$ = Speed of light
+\\
 
 $V_{rel}$ is given by
 \begin{align}
@@ -131,4 +137,4 @@ The functions necessary to model the channel are present in the below code,
 \begin{lstlisting}
     codes/channelmodel/channelmodel.py
 \end{lstlisting}
-
+\let\cleardoublepage\clearpage

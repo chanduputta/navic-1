@@ -23,3 +23,24 @@
 \BOOKMARK [1][-]{section.3.4}{Modulation}{chapter.3}% 23
 \BOOKMARK [2][-]{subsection.3.4.1}{Standard Positioning Service}{section.3.4}% 24
 \BOOKMARK [2][-]{subsection.3.4.2}{Baseband Modulation}{section.3.4}% 25
+\BOOKMARK [0][-]{chapter.4}{Channel Modelling}{}% 26
+\BOOKMARK [1][-]{section.4.1}{Doppler shift}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.2}{Delay}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.3}{Power Scaling}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.4}{Thermal noise}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Receiver}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Signal Acquistion}{chapter.5}% 32
+\BOOKMARK [2][-]{subsection.5.1.1}{Implementation of CA PCPS Acquisition}{section.5.1}% 33
+\BOOKMARK [1][-]{section.5.2}{Tracking}{chapter.5}% 34
+\BOOKMARK [2][-]{subsection.5.2.1}{Carrier and code wipeoff}{section.5.2}% 35
+\BOOKMARK [2][-]{subsection.5.2.2}{Pre-detection and integration}{section.5.2}% 36
+\BOOKMARK [2][-]{subsection.5.2.3}{Baseband signal processing}{section.5.2}% 37
+\BOOKMARK [1][-]{section.5.3}{Demodulation}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.4}{Decoding}{chapter.5}% 39
+\BOOKMARK [2][-]{subsection.5.4.1}{Process}{section.5.4}% 40
+\BOOKMARK [2][-]{subsection.5.4.2}{Convolutional Code Representation}{section.5.4}% 41
+\BOOKMARK [2][-]{subsection.5.4.3}{Decoding Output}{section.5.4}% 42
+\BOOKMARK [2][-]{subsection.5.4.4}{Example}{section.5.4}% 43
+\BOOKMARK [0][-]{chapter.6}{Results}{}% 44
+\BOOKMARK [1][-]{section.6.1}{Acquisition}{chapter.6}% 45
+\BOOKMARK [1][-]{section.6.2}{Tracking and Decoding}{chapter.6}% 46

@@ -10,3 +10,13 @@
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Structure of subframe 3 and 4\relax }}{15}{figure.caption.11}%
 \contentsline {figure}{\numberline {3.5}{\ignorespaces SPS PRN Code Generator\relax }}{16}{figure.caption.12}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces FEC Encoding\relax }}{17}{figure.caption.14}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The Block Level Architecture for Receiver\relax }}{28}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces PCPS algorithm flow\relax }}{30}{figure.caption.19}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Tracking block diagram\relax }}{33}{figure.caption.20}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Generic baseband processor code and carrier tracking loops block diagram\relax }}{35}{figure.caption.21}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The Block Level Architecture for Channel decoding\relax }}{40}{figure.caption.23}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Trellis flow for Viterbi algorithm\relax }}{43}{figure.caption.24}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Tracking result plot\relax }}{47}{figure.caption.25}%
