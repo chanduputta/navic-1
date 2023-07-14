@@ -31,7 +31,7 @@ are placed in geostationary orbit and four satellites are placed in inclined geo
 NavIC provides two levels of service, the "standard positioning service", which is open for civilian use, and a "restricted service" (an encrypted one) for authorised users (including the military). NavIC has a theoritical positional accuracy of $5$m - $20$m for general users and $0.5$m for military purposes.
 \\
 \\
-This book describes the NavIC standards simulation using Python code. $<<$ Will add description about the organization of the sections here, after all sections are edited $>>$
+This book describes the NavIC standards simulation using Python code. Chapter 2  provides NavIC system overview, various frequency bands used and various services provided by NavIC. Chapter 3 describes the implementation details of Transmitter module. Chapter 4 details about various channeling parameters used in simulation. Chapter 5 elaborately describes the implementation details of Receiver module. Chapter 6 details out key results from the simulation.   
 \\
 \\
 \section{Scope of simulation}	
@@ -39,6 +39,7 @@ The scope of the simulation is limited to
 \begin{enumerate}
 	\item sending baseband signal (without a carrier) thorugh transmitter module, mixing it with channel modelling module and verifying that the same baseband signal is received at the output of the receiver module. 
 	\item baseband signals for L5 and S bands (L1 band is out of scope)
+	\item only SPS services signal (RS signal is out of scope) 
 \end{enumerate}
 
 

@@ -268,9 +268,11 @@ In the figure \ref{fig:Trellis},
 \\
 \textbf{Receiver side:} 
 
-\noindent Assume the bits at top are received codewords - 00 01 01 10 10. The codewords are compared with the possible transition states from the input diagram, thereby calculating hamming distance between received and possible outputs as per Trellis diagram. For example, for codeword $00$, state is $00$ and two possible paths are drawn in red. Hamming distance is calculated between received codeword $00$ and possible outputs - $00, 11$.
+\noindent Assume the bits at top are received codewords - \textbf{00 01 01 10 10}. The codewords are compared with the possible transition states from the input diagram, thereby calculating hamming distance between received and possible outputs as per Trellis diagram. For example, for codeword $00$, state is $00$ and two possible paths are drawn in red. Hamming distance is calculated between received codeword $00$ and possible outputs - $00, 11$.
 
 \noindent Similarly in the next step, for codeword $01$, possible paths are from state $00$ and state $01$. Hence, hamming distance is calculated for all possible paths. When a node has 2 or more inputs, the least hamming distance is chosen. Branch metric is the minimum hamming distance value for a given path. Path metric is the sum of previously calculated path metric and current branch metric. At the end, if the path metric value is equal for 2 different traceback paths, they are chosen with equal probability.
+
+\noindent The process continues till the final codeword $10$ is examined. Finally, a path with the least values of path metric is chosen. In this case the path from end to start is marked in the figure \ref{fig:Trellis}. The decoded codeword is determined as \textbf{00 11 01 00 10}.
 \\
 \\
 The functions for acquisition and tracking are present in the below code
