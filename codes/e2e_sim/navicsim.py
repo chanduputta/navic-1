@@ -917,9 +917,11 @@ def find_sync_word(data):
         if window == SYNC_WORD:
             status = 1
             fsync_index = index - sync_word_length + 1
+            break
         elif window == INV_SYNC_WORD:
             status = -1
             fsync_index = index - sync_word_length + 1
+            break
 
     return status, fsync_index
 
